@@ -271,7 +271,7 @@ const AccountPage = () => {
                     <label className="block text-sm font-medium text-slate-500 mb-2">Bed Type</label>
                     <select className="w-full p-2 border border-slate-300 rounded-lg">
                       <option>King</option>
-                      <option>Queen</option>
+                      <option>Queen</option> 
                       <option>Twin</option>
                     </select>
                   </div>
