@@ -1,4 +1,5 @@
 import { SignedIn, useUser } from "@clerk/clerk-react";
+import { useState } from "react";
 import { Navigate } from "react-router";
 import { 
   User, 
@@ -16,6 +17,7 @@ import {
 
 const AccountPage = () => {
   const { isLoaded, isSignedIn, user } = useUser();
+  const [activationSection, setActivationSection] = useState("profile");
 
   if (!isLoaded) {
     return (
@@ -29,7 +31,6 @@ const AccountPage = () => {
     return <Navigate to="/sign-in" />;
   }
 
-  // Mock data for user bookings
   const bookings = [
     { id: 1, hotel: "Grand Hotel Paris", location: "Paris, France", date: "Apr 15-18, 2025", status: "Upcoming", price: "$450" },
     { id: 2, hotel: "Tokyo Luxury Suite", location: "Tokyo, Japan", date: "May 3-7, 2025", status: "Upcoming", price: "$720" },
@@ -38,29 +39,23 @@ const AccountPage = () => {
 
   return (
     <main className="bg-slate-50 min-h-screen pb-16">
-      {/* Header */}
-      <div className="bg-white border-b border-slate-200 mb-8">
-        <div className="container mx-auto px-4 py-8">
-          <h1 className="text-3xl md:text-4xl font-bold">My Account</h1>
-          <p className="text-slate-500 mt-2">Manage your profile and booking preferences</p>
-        </div>
-      </div>
 
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 mt-10">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Sidebar */}
           <div className="lg:col-span-1">
             <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
               <div className="p-6 border-b border-slate-200 flex items-center space-x-4">
-                <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center">
-                  {user?.profileImageUrl ? (
+                <div className="w-24 h-24 rounded-full bg-white p-1 flex-shrink-0">
+                  {user?.imageUrl ? (
                     <img 
-                      src={user.profileImageUrl} 
-                      alt={user.fullName || "User"} 
-                      className="w-16 h-16 rounded-full object-cover"
+                      src={user.imageUrl} 
+                      alt={user?.fullName || "User"} 
+                      className="w-full h-full rounded-full object-cover"
                     />
                   ) : (
-                    <User size={32} className="text-blue-500" />
+                    <div className="w-full h-full rounded-full bg-teal-100 flex items-center justify-center">
+                      <UserCircle size={48} className="text-teal-700" />
+                    </div>
                   )}
                 </div>
                 <div>
@@ -71,50 +66,45 @@ const AccountPage = () => {
               
               <nav className="p-2">
                 <ul className="space-y-1">
-                  <li>
-                    <a href="#profile" className="flex items-center space-x-3 p-3 rounded-lg bg-blue-50 text-blue-600">
+                  <li className="cursor-pointer" onClick={() => setActivationSection("profile")}>
+                    <a className="flex items-center space-x-3 p-3 rounded-lg bg-blue-50 text-blue-600">
                       <User size={18} />
                       <span>Profile</span>
                     </a>
                   </li>
-                  <li>
-                    <a href="#bookings" className="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-50 text-slate-700">
+
+                  <li className="cursor-pointer" onClick={() => setActivationSection("bookings")}>
+                    <a className="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-50 text-slate-700">
                       <Calendar size={18} />
                       <span>My Bookings</span>
                     </a>
                   </li>
-                  <li>
-                    <a href="#payment" className="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-50 text-slate-700">
+                  <li className="cursor-pointer" onClick={() => setActivationSection("payment")}>
+                    <a className="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-50 text-slate-700">
                       <CreditCard size={18} />
                       <span>Payment Methods</span>
                     </a>
                   </li>
-                  <li>
-                    <a href="#favorites" className="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-50 text-slate-700">
+                  <li className="cursor-pointer" onClick={() => setActivationSection("saved")}>
+                    <a className="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-50 text-slate-700">
                       <Heart size={18} />
-                      <span>Saved Hotels</span>
+                      <span>Saved Hotels</span> 
                     </a>
                   </li>
-                  <li>
-                    <a href="#notifications" className="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-50 text-slate-700">
+                  <li className="cursor-pointer" id="notifications">
+                    <a className="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-50 text-slate-700">
                       <Bell size={18} />
                       <span>Notifications</span>
                     </a>
                   </li>
-                  <li>
-                    <a href="#security" className="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-50 text-slate-700">
-                      <Shield size={18} />
-                      <span>Security</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#settings" className="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-50 text-slate-700">
+                  <li className="cursor-pointer" id="settings">
+                    <a  className="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-50 text-slate-700">
                       <Settings size={18} />
                       <span>Settings</span>
                     </a>
                   </li>
-                  <li>
-                    <a href="#help" className="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-50 text-slate-700">
+                  <li className="cursor-pointer" id="help">
+                    <a className="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-50 text-slate-700">
                       <HelpCircle size={18} />
                       <span>Help Center</span>
                     </a>
@@ -131,10 +121,9 @@ const AccountPage = () => {
             </div>
           </div>
 
-          {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
-            {/* Profile Section */}
-            <section id="profile" className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+
+            { activationSection === "profile" && (<section id="profile" className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
               <div className="flex justify-between items-center p-6 border-b border-slate-200">
                 <h2 className="text-xl font-semibold">Personal Information</h2>
                 <button className="text-blue-600 hover:text-blue-800 flex items-center space-x-1">
@@ -179,10 +168,9 @@ const AccountPage = () => {
                   </div>
                 </div>
               </div>
-            </section>
+            </section>)}
 
-            {/* Bookings Section */}
-            <section id="bookings" className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+            {activationSection === "bookings" && (<section className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
               <div className="p-6 border-b border-slate-200">
                 <h2 className="text-xl font-semibold">Recent Bookings</h2>
               </div>
@@ -232,12 +220,12 @@ const AccountPage = () => {
                   <button className="text-blue-600 hover:text-blue-800 flex items-center space-x-2">
                     <span>View all bookings</span>
                   </button>
-                </div>
+                </div> 
               </div>
-            </section>
+            </section>)}
 
-            {/* Payment Methods Section */}
-            <section id="payment" className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+
+            {activationSection === "payment" && (<section id="payment" className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
               <div className="p-6 border-b border-slate-200">
                 <h2 className="text-xl font-semibold">Payment Methods</h2>
               </div>
@@ -263,10 +251,9 @@ const AccountPage = () => {
                   <span>Add Payment Method</span>
                 </button>
               </div>
-            </section>
+            </section>)}
 
-            {/* Travel Preferences */}
-            <section id="preferences" className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+            {activationSection === "saved" && (<section id="preferences" className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
               <div className="p-6 border-b border-slate-200">
                 <h2 className="text-xl font-semibold">Travel Preferences</h2>
               </div>
@@ -304,7 +291,7 @@ const AccountPage = () => {
                   </button>
                 </div>
               </div>
-            </section>
+            </section>)}
           </div>
         </div>
       </div>
