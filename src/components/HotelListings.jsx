@@ -47,7 +47,7 @@ export default function HotelListings() {
     } else if (sortOrder === "desc") {
       return b.hotel.price - a.hotel.price;
     }
-    return 0; // Default order
+    return 0;
   });
 
 
@@ -61,7 +61,9 @@ export default function HotelListings() {
             No hotels found matching your criteria.
           </p>
         ) : (
-          hotels.map(({ hotel, confidence }) => (
+          hotels
+          .filter((h) => h?.hotel) 
+          .map(({ hotel, confidence }) => (
             <HotelCard key={hotel._id} hotel={hotel} confidence={confidence} />
           ))
         )}
