@@ -20,7 +20,7 @@ export default function HotelListings() {
     query: searchValue,
   });
 
-  const locations = ["ALL", "France", "Italy", "Australia", "Japan", "Sri Lanaka", "Turkey", "USA", "Spain", "Germany", "Greece"];
+  const locations = ["ALL", "France", "Italy", "Australia", "Japan", "Sri Lanka", "Turkey", "USA", "Spain", "Germany", "Greece"];
   
   const handleSelectedLocation = (location) => {
     setSelectedLocation(location);
