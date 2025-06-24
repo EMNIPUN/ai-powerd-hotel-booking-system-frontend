@@ -42,6 +42,7 @@ export default function HotelPage() {
   const handleBook = async (bookingData) => {
     try {
       const booking = await createBooking(bookingData).unwrap();
+      navigate(`/booking/payment?bookingId=${booking._id}`);
       toast.success("Booking successful");
     } catch (error) {
       console.log(error);
