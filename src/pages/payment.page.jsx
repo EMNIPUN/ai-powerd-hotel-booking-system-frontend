@@ -13,13 +13,11 @@ function PaymentPage() {
     return <div>Loading...</div>;
   }
 
-  console.log(booking);
-
   return (
     <main className="container mx-auto px-4 py-8 min-h-screen">
       <h2 className="text-4xl font-bold">Review Your Booking</h2>
       <div className="mt-4">
-        <CheckoutForm bookingId={booking.booking._id} />
+        <CheckoutForm bookingId={booking._id} />
       </div>
     </main>
   );
