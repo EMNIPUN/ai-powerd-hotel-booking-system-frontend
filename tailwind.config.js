@@ -1,9 +1,17 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
-  theme: {
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],  theme: {
   	extend: {
+  		animation: {
+  			"slow-zoom": "slowZoom 25s ease-in-out infinite alternate",
+  		},
+  		keyframes: {
+  			slowZoom: {
+  				'0%': { transform: 'scale(1.0)' },
+  				'100%': { transform: 'scale(1.05)' },
+  			},
+  		},
   		colors: {
   			border: 'hsl(var(--border))',
   			input: 'hsl(var(--input))',

@@ -15,7 +15,9 @@ const App = () => {
           className="absolute top-0 left-0 w-full h-full object-cover -z-10"
         />
       </div>
-      <HotelListings />
+      <div>
+        <HotelListings /> 
+      </div>
     </>
   );
 };
