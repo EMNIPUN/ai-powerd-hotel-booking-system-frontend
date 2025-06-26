@@ -76,9 +76,9 @@ function Navigation() {
             <div className="flex items-center">
               <Globe className="h-4 w-4 mr-1.5" />
               <select className="bg-transparent border-none text-white text-sm focus:outline-none">
-                <option value="en">English</option>
-                <option value="es">Español</option>
-                <option value="fr">Français</option>
+                <option className="text-black" value="en">English</option>
+                <option className="text-black" value="es">Español</option>
+                <option className="text-black" value="fr">Français</option>
               </select>
             </div>
             <SignedIn>

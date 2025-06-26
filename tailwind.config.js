@@ -4,13 +4,35 @@ module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],  theme: {
   	extend: {
   		animation: {
-  			"slow-zoom": "slowZoom 25s ease-in-out infinite alternate",
+  			'slow-zoom': 'slowZoom 25s ease-in-out infinite alternate',
+  			'accordion-down': 'accordion-down 0.2s ease-out',
+  			'accordion-up': 'accordion-up 0.2s ease-out'
   		},
   		keyframes: {
   			slowZoom: {
-  				'0%': { transform: 'scale(1.0)' },
-  				'100%': { transform: 'scale(1.05)' },
+  				'0%': {
+  					transform: 'scale(1.0)'
+  				},
+  				'100%': {
+  					transform: 'scale(1.05)'
+  				}
   			},
+  			'accordion-down': {
+  				from: {
+  					height: '0'
+  				},
+  				to: {
+  					height: 'var(--radix-accordion-content-height)'
+  				}
+  			},
+  			'accordion-up': {
+  				from: {
+  					height: 'var(--radix-accordion-content-height)'
+  				},
+  				to: {
+  					height: '0'
+  				}
+  			}
   		},
   		colors: {
   			border: 'hsl(var(--border))',
