@@ -21,6 +21,8 @@ import AdminProtectedLayout from "./layouts/admin-protected-layout";
 import PaymentPage from "./pages/payment.page";
 import CompletePage from "./pages/complete.page";
 import HelpCenterPage from "./pages/helpcenter.page";
+import PopularDestinationPage from "./pages/populardestination.page";
+import BeachDestinationPage from "./pages/beachdestination.page";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -44,7 +46,9 @@ createRoot(document.getElementById("root")).render(
                   <Route path="/booking/payment" element={<PaymentPage />} />
                   <Route path="/booking/complete" element={<CompletePage />} />
                   <Route path="/help" element={<HelpCenterPage />} />
-                  {/* <Route element={<AdminProtectedLayout />}> */}
+                  <Route path="/destinations/popular" element={<PopularDestinationPage />} />
+                  <Route path="/destinations/beach" element={<BeachDestinationPage />} />
+                    {/* <Route element={<AdminProtectedLayout />}> */}
                     <Route path="/admin/hotels/create" element={<CreateHotelPage />} />
                   {/* </Route> */}
                 {/* </Route> */}
